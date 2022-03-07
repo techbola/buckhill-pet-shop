@@ -1,34 +1,56 @@
 <template>
-  <v-app-bar app color="primary" dark>
+  <v-app-bar app color="#4EC690" dark>
     <div class="d-flex align-center">
       <v-img
-        alt="Vuetify Logo"
+        alt="Logo"
         class="shrink mr-2"
         contain
-        src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+        src="images/logo.svg"
         transition="scale-transition"
-        width="40"
+        width="30"
       />
 
-      <v-img
-        alt="Vuetify Name"
-        class="shrink mt-1 hidden-sm-and-down"
-        contain
-        min-width="100"
-        src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-        width="100"
-      />
+      <span><strong>PetStore</strong></span>
     </div>
 
-    <v-spacer></v-spacer>
+    <nav>
+      <ul>
+        <li>
+          <a>Products</a>
+        </li>
+        <li>
+          <a>Promotions</a>
+        </li>
+        <li>
+          <a>Blog</a>
+        </li>
+      </ul>
+    </nav>
 
-    <v-btn
-      href="https://github.com/vuetifyjs/vuetify/releases/latest"
-      target="_blank"
-      text
-    >
-      <span class="mr-2">Latest Release</span>
-      <v-icon>mdi-open-in-new</v-icon>
-    </v-btn>
+    <div>
+      <v-btn outlined class="ma-2 white--text">
+        <v-icon left dark> mdi-cart </v-icon>
+        Upload
+      </v-btn>
+      <v-btn outlined class="ma-2 white--text"> LOGIN </v-btn>
+    </div>
   </v-app-bar>
 </template>
+
+<style scoped>
+::v-deep .v-toolbar__content {
+  display: flex;
+  justify-content: space-around;
+}
+nav ul {
+  display: flex;
+  list-style: none;
+}
+nav ul li {
+  margin-right: 1rem;
+}
+nav ul li a {
+  color: #ffffff;
+  text-transform: uppercase;
+}
+</style>
