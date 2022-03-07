@@ -1,6 +1,6 @@
 <template>
   <v-app-bar app color="#4EC690" dark>
-    <div class="d-flex align-center">
+    <div class="logo d-flex align-center" @click="goHome">
       <v-img
         alt="Logo"
         class="shrink mr-2"
@@ -32,10 +32,25 @@
         <v-icon left dark> mdi-cart </v-icon>
         Cart (0)
       </v-btn>
-      <v-btn outlined class="ma-2 white--text"> Login </v-btn>
+      <v-btn outlined class="ma-2 white--text" @click="showLoginModal">
+        Login
+      </v-btn>
     </div>
   </v-app-bar>
 </template>
+
+<script>
+export default {
+  methods: {
+    goHome() {
+      this.$router.push({ path: "/" });
+    },
+    showLoginModal() {
+      this.$emit("show-login-modal");
+    },
+  },
+};
+</script>
 
 <style scoped>
 ::v-deep .v-toolbar__content {
@@ -52,5 +67,9 @@ nav ul li {
 nav ul li a {
   color: #ffffff;
   text-transform: uppercase;
+}
+
+.logo:hover {
+  cursor: pointer;
 }
 </style>

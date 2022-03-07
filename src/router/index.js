@@ -17,6 +17,11 @@ const routes = [
         component: () => import("../views/Home.vue"),
         name: "Home",
       },
+      {
+        path: "/forgot-password",
+        component: () => import("../views/ForgotPassword.vue"),
+        name: "ForgotPassword",
+      },
     ],
   },
   /*************************

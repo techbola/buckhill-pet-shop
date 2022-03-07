@@ -6,7 +6,7 @@
           <v-col sm="8">
             <v-text-field
               outlined
-              label="Search products"
+              placeholder="Search products"
               prepend-inner-icon="mdi-magnify"
             ></v-text-field>
           </v-col>
