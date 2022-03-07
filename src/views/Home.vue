@@ -11,7 +11,7 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <v-img src="images/banner.png" contain></v-img>
+        <v-img src="../assets/images/banner.png" contain></v-img>
       </v-col>
     </v-row>
   </v-container>

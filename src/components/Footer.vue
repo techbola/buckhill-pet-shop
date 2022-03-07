@@ -7,7 +7,7 @@
             alt="Logo"
             class="shrink mr-2"
             contain
-            src="images/logo-footer.svg"
+            src="../assets/images/logo-footer.svg"
             transition="scale-transition"
             width="60"
           />
