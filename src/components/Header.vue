@@ -30,9 +30,9 @@
     <div>
       <v-btn outlined class="ma-2 white--text">
         <v-icon left dark> mdi-cart </v-icon>
-        Upload
+        Cart (0)
       </v-btn>
-      <v-btn outlined class="ma-2 white--text"> LOGIN </v-btn>
+      <v-btn outlined class="ma-2 white--text"> Login </v-btn>
     </div>
   </v-app-bar>
 </template>
