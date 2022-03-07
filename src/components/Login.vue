@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="loginDialog" max-width="600px">
+  <v-dialog v-model="loginDialog" max-width="600px" @click:outside="closeLogin">
     <v-card class="pa-6">
       <v-card-title class="flex-column">
         <v-img
@@ -74,8 +74,10 @@ export default {
       this.$emit("show-register");
     },
     forgotPassword() {
-      this.loginDialog = false;
-      this.$router.push({ name: "ForgotPassword" });
+      this.$emit("forgot-password");
+    },
+    closeLogin() {
+      this.$emit("close-login");
     },
   },
 };

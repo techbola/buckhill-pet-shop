@@ -46,7 +46,7 @@ export default {
       this.$router.push({ path: "/" });
     },
     showLoginModal() {
-      this.$emit("show-login-modal");
+      this.$emit("show-login");
     },
   },
 };

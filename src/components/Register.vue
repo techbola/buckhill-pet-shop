@@ -1,5 +1,9 @@
 <template>
-  <v-dialog v-model="registerDialog" max-width="600px">
+  <v-dialog
+    v-model="registerDialog"
+    max-width="600px"
+    @click:outside="closeRegister"
+  >
     <v-card class="pa-6">
       <v-card-title class="flex-column">
         <v-img
@@ -89,6 +93,9 @@ export default {
   methods: {
     showLoginModal() {
       this.$emit("show-login");
+    },
+    closeRegister() {
+      this.$emit("close-register");
     },
   },
 };

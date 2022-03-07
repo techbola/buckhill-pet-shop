@@ -1,16 +1,25 @@
 <template>
   <v-app>
-    <Header @show-login-modal="showLogin" />
+    <Header @show-login="showLogin" />
     <v-main>
       <router-view />
     </v-main>
     <Footer />
 
     <!-- Login Dialog -->
-    <Login :loginDialog="loginDialog" @show-register="showRegister" />
+    <Login
+      :loginDialog="loginDialog"
+      @show-register="showRegister"
+      @forgot-password="forgotPassword"
+      @close-login="loginDialog = false"
+    />
 
     <!-- Register Dialog -->
-    <Register :registerDialog="registerDialog" @show-login="showLogin" />
+    <Register
+      :registerDialog="registerDialog"
+      @show-login="showLogin"
+      @close-register="registerDialog = false"
+    />
   </v-app>
 </template>
 
@@ -34,6 +43,10 @@ export default {
     showRegister() {
       this.loginDialog = false;
       this.registerDialog = true;
+    },
+    forgotPassword() {
+      this.loginDialog = false;
+      this.$router.push({ name: "ForgotPassword" });
     },
   },
 };
