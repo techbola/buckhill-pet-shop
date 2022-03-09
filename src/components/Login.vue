@@ -1,6 +1,9 @@
 <template>
   <v-dialog v-model="loginDialog" max-width="600px" @click:outside="closeLogin">
     <v-card class="pa-6">
+      <span class="close-icon" @click="closeLogin"
+        ><v-icon> mdi-close </v-icon></span
+      >
       <v-card-title class="flex-column">
         <v-img
           alt="Logo"
@@ -82,3 +85,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.close-icon {
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+}
+</style>
