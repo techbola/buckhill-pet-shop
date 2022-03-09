@@ -1,10 +1,16 @@
 <template>
   <div>
     <img src="../assets/images/product.png" alt="" />
-    <h6 class="product-name text-capitalize">
-      {{ product.title | truncate(30) }}
-    </h6>
-    <div class="text-capitalize product-brand">{{ product.brand.title }}</div>
+    <div>
+      <router-link
+        class="product-name text-capitalize"
+        :to="{ name: 'ProductDetails', params: { id: product.uuid } }"
+        >{{ product.title | truncate(30) }}</router-link
+      >
+    </div>
+    <div class="text-capitalize product-brand">
+      {{ product.brand.title }}
+    </div>
     <div class="product-price">{{ product.price }} kn</div>
   </div>
 </template>

@@ -2,10 +2,8 @@ import axiosClient from "../../axios";
 
 /*state initialization */
 const initialState = {
-  user: {
-    data: {},
-    token: "123", //sessionStorage.getItem("TOKEN")
-  },
+  user: {},
+  token: sessionStorage.getItem("TOKEN"),
 };
 
 export const state = { ...initialState };
@@ -14,18 +12,18 @@ export const state = { ...initialState };
 const actions = {
   register({ commit }, user) {
     return axiosClient.post("/user/create", user).then(({ data }) => {
-      commit("setUser", data);
-      return data;
+      commit("setUser", data.data);
+      return data.data;
     });
   },
   login({ commit }, user) {
     return axiosClient.post("/user/login", user).then(({ data }) => {
-      commit("setUser", data);
-      return data;
+      commit("setUser", data.data);
+      return data.data;
     });
   },
   logout({ commit }) {
-    return axiosClient.post("/user/logout").then(({ data }) => {
+    return axiosClient.get("/user/logout").then(({ data }) => {
       commit("logout");
       return data;
     });
@@ -35,13 +33,14 @@ const actions = {
 /*exporting the mutation*/
 export const mutations = {
   logout: (state) => {
-    state.user.data = {};
-    state.user.token = null;
+    state.user = {};
+    state.token = null;
     sessionStorage.clear();
   },
   setUser: (state, userData) => {
-    state.user.token = userData.token;
-    state.user.data = userData.user;
+    console.log("dd", userData);
+    state.token = userData.token;
+    state.user = userData;
     sessionStorage.setItem("TOKEN", userData.token);
   },
 };
@@ -53,6 +52,7 @@ const getters = {
 };
 
 export default {
+  namespaced: true,
   state,
   actions,
   mutations,

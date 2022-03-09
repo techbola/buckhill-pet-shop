@@ -32,7 +32,15 @@
         <v-icon left dark> mdi-cart </v-icon>
         Cart (0)
       </v-btn>
-      <v-btn outlined class="ma-2 white--text" @click="showLoginModal">
+      <v-btn
+        v-if="user && user.token"
+        outlined
+        class="ma-2 white--text"
+        @click="logout"
+      >
+        Logout
+      </v-btn>
+      <v-btn v-else outlined class="ma-2 white--text" @click="showLoginModal">
         Login
       </v-btn>
     </div>
@@ -40,6 +48,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
   methods: {
     goHome() {
@@ -48,6 +58,12 @@ export default {
     showLoginModal() {
       this.$emit("show-login");
     },
+    ...mapActions({
+      logout: "user/logout",
+    }),
+  },
+  computed: {
+    ...mapState({ user: "user" }),
   },
 };
 </script>

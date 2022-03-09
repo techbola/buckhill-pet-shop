@@ -56,21 +56,13 @@ export default {
         (product) => (product.category_uuid = categoryId)
       );
     });
-
-    // this.getProductImage("ae0623ac-a434-3826-9b5c-c3e183661030").then(
-    //   (data) => {
-    //     this.filee = data;
-    //     console.log("ff", this.filee);
-    //   }
-    // );
   },
   computed: {
-    ...mapGetters(["products"]),
+    ...mapGetters({ products: "product/products" }),
   },
   methods: {
     ...mapActions({
-      getProducts: "getProducts",
-      getProductImage: "getFile",
+      getProducts: "product/getProducts",
     }),
   },
 };

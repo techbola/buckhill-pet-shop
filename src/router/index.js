@@ -18,6 +18,11 @@ const routes = [
         name: "Home",
       },
       {
+        path: "/product/:id",
+        component: () => import("../views/ProductDetails.vue"),
+        name: "ProductDetails",
+      },
+      {
         path: "/forgot-password",
         component: () => import("../views/ForgotPassword.vue"),
         name: "ForgotPassword",

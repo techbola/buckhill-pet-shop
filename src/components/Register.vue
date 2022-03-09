@@ -22,12 +22,19 @@
       <v-card-text>
         <v-container>
           <v-row>
+            <v-col cols="12">
+              <validation-errors
+                :errors="errors"
+                v-if="errors"
+              ></validation-errors>
+            </v-col>
             <v-col cols="12" md="6">
               <v-text-field
                 outlined
                 placeholder="First Name *"
                 required
                 hide-details
+                v-model="user.first_name"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="6">
@@ -36,6 +43,7 @@
                 placeholder="Last Name *"
                 required
                 hide-details
+                v-model="user.last_name"
               ></v-text-field>
             </v-col>
             <v-col cols="12">
@@ -44,6 +52,7 @@
                 placeholder="Email Address *"
                 required
                 hide-details
+                v-model="user.email"
               ></v-text-field>
             </v-col>
             <v-col cols="12">
@@ -52,6 +61,8 @@
                 placeholder="Password *"
                 required
                 hide-details
+                type="password"
+                v-model="user.password"
               ></v-text-field>
             </v-col>
             <v-col cols="12">
@@ -60,6 +71,8 @@
                 placeholder="Confirm Password *"
                 required
                 hide-details
+                type="password"
+                v-model="user.password_confirmation"
               ></v-text-field>
             </v-col>
             <v-col cols="12">
@@ -67,7 +80,7 @@
                 block
                 depressed
                 color="primary white--text"
-                @click="registerDialog = false"
+                @click="register"
               >
                 Sign Up
               </v-btn>
@@ -89,17 +102,52 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import ValidationErrors from "./ValidationErrors.vue";
+
 export default {
+  components: { ValidationErrors },
   props: {
     registerDialog: Boolean,
   },
+  data() {
+    return {
+      user: {
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
+        address: "Address",
+        phone_number: "12345678",
+        avatar: "",
+        is_marketing: "",
+      },
+      errors: {},
+    };
+  },
   methods: {
+    register() {
+      this.errors = {};
+      this.registerUser(this.user)
+        .then(() => {
+          this.closeRegister();
+        })
+        .catch((error) => {
+          if (error.response.status) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
     showLoginModal() {
       this.$emit("show-login");
     },
     closeRegister() {
       this.$emit("close-register");
     },
+    ...mapActions({
+      registerUser: "user/register",
+    }),
   },
 };
 </script>
