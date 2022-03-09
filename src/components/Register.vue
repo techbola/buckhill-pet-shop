@@ -52,6 +52,7 @@
                 placeholder="Email Address *"
                 required
                 hide-details
+                type="email"
                 v-model="user.email"
               ></v-text-field>
             </v-col>

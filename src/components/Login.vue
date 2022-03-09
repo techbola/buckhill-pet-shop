@@ -19,11 +19,20 @@
         <v-container>
           <v-row>
             <v-col cols="12">
+              <div v-if="error" class="red--text">{{ error }}</div>
+              <validation-errors
+                :errors="errors"
+                v-if="errors"
+              ></validation-errors>
+            </v-col>
+            <v-col cols="12">
               <v-text-field
                 outlined
                 placeholder="Email Address *"
                 required
                 hide-details
+                type="email"
+                v-model="user.email"
               ></v-text-field>
             </v-col>
             <v-col cols="12">
@@ -32,15 +41,12 @@
                 placeholder="Password *"
                 required
                 hide-details
+                type="password"
+                v-model="user.password"
               ></v-text-field>
             </v-col>
             <v-col cols="12">
-              <v-btn
-                block
-                depressed
-                color="primary white--text"
-                @click="loginDialog = false"
-              >
+              <v-btn block depressed color="primary white--text" @click="login">
                 Log In
               </v-btn>
             </v-col>
@@ -68,11 +74,42 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import ValidationErrors from "./ValidationErrors.vue";
+
 export default {
+  components: { ValidationErrors },
   props: {
     loginDialog: Boolean,
   },
+  data() {
+    return {
+      user: {
+        email: "",
+        password: "",
+      },
+      errors: {},
+      error: "",
+    };
+  },
   methods: {
+    login() {
+      this.errors = {};
+      this.error = "";
+      this.loginUser(this.user)
+        .then(() => {
+          this.closeLogin();
+        })
+        .catch((error) => {
+          if (error.response.status == 422) {
+            if (error.response.data.errors.length > 0) {
+              this.errors = error.response.data.errors;
+            } else if (error.response.data.error) {
+              this.error = error.response.data.error;
+            }
+          }
+        });
+    },
     showRegisterModal() {
       this.$emit("show-register");
     },
@@ -82,6 +119,9 @@ export default {
     closeLogin() {
       this.$emit("close-login");
     },
+    ...mapActions({
+      loginUser: "user/login",
+    }),
   },
 };
 </script>

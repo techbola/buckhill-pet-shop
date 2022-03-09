@@ -27,19 +27,24 @@
       </ul>
     </nav>
 
-    <div>
+    <div class="d-flex">
       <v-btn outlined class="ma-2 white--text">
         <v-icon left dark> mdi-cart </v-icon>
         Cart (0)
       </v-btn>
-      <v-btn
-        v-if="user && user.token"
-        outlined
-        class="ma-2 white--text"
-        @click="logout"
-      >
-        Logout
-      </v-btn>
+      <div v-if="user && user.token" class="d-flex">
+        <v-btn outlined class="ma-2 white--text" @click="logout">
+          Logout
+        </v-btn>
+        <v-img
+          alt="Logo"
+          class="profile-img shrink ml-2"
+          contain
+          src="../assets/images/profile.png"
+          transition="scale-transition"
+          width="40"
+        />
+      </div>
       <v-btn v-else outlined class="ma-2 white--text" @click="showLoginModal">
         Login
       </v-btn>
@@ -85,7 +90,8 @@ nav ul li a {
   text-transform: uppercase;
 }
 
-.logo:hover {
+.logo:hover,
+.profile-img {
   cursor: pointer;
 }
 </style>
