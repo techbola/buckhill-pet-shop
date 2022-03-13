@@ -1,9 +1,10 @@
 import axiosClient from "../../axios";
+import { LOGOUT_USER, SET_USER, SET_USER_TOKEN } from "../mutation-types";
 
 /*state initialization */
 const initialState = {
   user: {},
-  token: sessionStorage.getItem("TOKEN"),
+  token: localStorage.getItem("TOKEN"),
 };
 
 export const state = { ...initialState };
@@ -12,19 +13,26 @@ export const state = { ...initialState };
 const actions = {
   register({ commit }, user) {
     return axiosClient.post("/user/create", user).then(({ data }) => {
-      commit("setUser", data.data);
+      commit(SET_USER, data.data);
+      commit(SET_USER_TOKEN, data.data.token);
       return data.data;
     });
   },
   login({ commit }, user) {
     return axiosClient.post("/user/login", user).then(({ data }) => {
-      commit("setUser", data.data);
+      commit(SET_USER_TOKEN, data.data.token);
+      return data.data;
+    });
+  },
+  getUser({ commit }) {
+    return axiosClient.get("/user").then(({ data }) => {
+      commit(SET_USER, data.data);
       return data.data;
     });
   },
   logout({ commit }) {
     return axiosClient.get("/user/logout").then(({ data }) => {
-      commit("logout");
+      commit(LOGOUT_USER);
       return data;
     });
   },
@@ -32,16 +40,17 @@ const actions = {
 
 /*exporting the mutation*/
 export const mutations = {
-  logout: (state) => {
+  logoutUser: (state) => {
     state.user = {};
     state.token = null;
-    sessionStorage.clear();
+    localStorage.clear();
   },
   setUser: (state, userData) => {
-    console.log("dd", userData);
-    state.token = userData.token;
     state.user = userData;
-    sessionStorage.setItem("TOKEN", userData.token);
+  },
+  setUserToken: (state, data) => {
+    state.token = data;
+    localStorage.setItem("TOKEN", data);
   },
 };
 /* setting the getters*/

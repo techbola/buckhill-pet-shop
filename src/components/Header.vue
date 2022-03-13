@@ -43,6 +43,7 @@
           src="../assets/images/profile.png"
           transition="scale-transition"
           width="40"
+          @click="showUserSettingsModal"
         />
       </div>
       <v-btn v-else outlined class="ma-2 white--text" @click="showLoginModal">
@@ -62,6 +63,9 @@ export default {
     },
     showLoginModal() {
       this.$emit("show-login");
+    },
+    showUserSettingsModal() {
+      this.$emit("show-settings-modal");
     },
     ...mapActions({
       logout: "user/logout",

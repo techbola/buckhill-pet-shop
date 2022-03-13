@@ -1,4 +1,5 @@
 import axiosClient from "../../axios";
+import { SET_PRODUCT, SET_PRODUCTS } from "../mutation-types";
 
 /*state initialization */
 const initialState = {
@@ -12,13 +13,13 @@ export const state = { ...initialState };
 const actions = {
   getProducts({ commit }) {
     return axiosClient.get("/products").then(({ data }) => {
-      commit("setProducts", data.data);
+      commit(SET_PRODUCTS, data.data);
       return data.data;
     });
   },
   getProduct({ commit }, productId) {
     return axiosClient.get(`/product/${productId}`).then(({ data }) => {
-      commit("setProduct", data.data);
+      commit(SET_PRODUCT, data.data);
       return data.data;
     });
   },

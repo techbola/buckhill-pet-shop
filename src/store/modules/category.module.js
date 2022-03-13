@@ -1,4 +1,5 @@
 import axiosClient from "../../axios";
+import { SET_CATEGORIES } from "../mutation-types";
 
 /*state initialization */
 const initialState = {
@@ -12,7 +13,7 @@ export const state = { ...initialState };
 const actions = {
   getCategories({ commit }) {
     return axiosClient.get("/categories").then(({ data }) => {
-      commit("setCategories", data);
+      commit(SET_CATEGORIES, data);
       return data;
     });
   },
