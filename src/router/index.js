@@ -29,25 +29,6 @@ const routes = [
       },
     ],
   },
-  /*************************
-   ** Admin routes ****
-   *************************/
-  {
-    path: "/admin",
-    // beforeEnter: isAdmin,
-    component: () => import("../views/admin/Layout.vue"),
-    meta: { requiresAuth: true },
-    redirect: {
-      name: "AdminDashboard",
-    },
-    children: [
-      {
-        path: "dashboard",
-        component: () => import("../views/admin/Dashboard.vue"),
-        name: "AdminDashboard",
-      },
-    ],
-  },
 ];
 
 const router = new VueRouter({

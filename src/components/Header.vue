@@ -54,9 +54,11 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapActions } from "vuex";
+import { UserData } from "../mixins/userData";
 
 export default {
+  mixins: [UserData],
   methods: {
     goHome() {
       this.$router.push({ path: "/" });
@@ -70,9 +72,6 @@ export default {
     ...mapActions({
       logout: "user/logout",
     }),
-  },
-  computed: {
-    ...mapState({ user: "user" }),
   },
 };
 </script>

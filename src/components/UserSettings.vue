@@ -64,21 +64,17 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { UserData } from "../mixins/userData";
+
 export default {
+  mixins: [UserData],
   props: {
     userSettingsDialog: Boolean,
-  },
-  created() {
-    this.getUserDetails();
   },
   methods: {
     closeUserSettings() {
       this.$emit("close-user-settings");
     },
-    ...mapActions({
-      getUserDetails: "user/getUser",
-    }),
   },
   computed: {
     fullname() {
@@ -86,7 +82,6 @@ export default {
         ? this.user.user.first_name + " " + this.user.user.last_name
         : "";
     },
-    ...mapState({ user: "user" }),
   },
 };
 </script>

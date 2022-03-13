@@ -58,6 +58,7 @@
 }
 .footer-links ul {
   list-style: none;
+  padding-left: 0;
 }
 .footer-links ul li,
 .footer-links p {

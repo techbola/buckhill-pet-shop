@@ -5,6 +5,7 @@ import { LOGOUT_USER, SET_USER, SET_USER_TOKEN } from "../mutation-types";
 const initialState = {
   user: {},
   token: localStorage.getItem("TOKEN"),
+  isAdmin: false,
 };
 
 export const state = { ...initialState };
@@ -18,10 +19,10 @@ const actions = {
       return data.data;
     });
   },
-  login({ commit }, user) {
+  login({ commit, dispatch }, user) {
     return axiosClient.post("/user/login", user).then(({ data }) => {
       commit(SET_USER_TOKEN, data.data.token);
-      return data.data;
+      dispatch("getUser");
     });
   },
   getUser({ commit }) {
